@@ -5,27 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyPngBtn = document.getElementById('copy-png-btn');
     const fileInput = document.getElementById('file-input');
     const loader = document.getElementById('loader');
-    const themeToggle = document.getElementById('theme-toggle');
 
     let debounceTimer;
 
-    const getPdfStyles = (isDarkMode) => {
-        if (isDarkMode) {
-            return `
-                body { font-family: Arial, sans-serif; font-size: 12pt; line-height: 1.5; color: #c9d1d9; background-color: #0d1117; }
-                pre, code { font-family: 'Courier New', Courier, monospace; }
-                pre { background-color: #161b22; padding: 1em; border-radius: 6px; overflow-x: auto; border: 1px solid #30363d; }
-                table { border-collapse: collapse; width: 100%; margin-top: 1em; margin-bottom: 1em; }
-                th, td { border: 1px solid #30363d; padding: 8px 12px; }
-                thead { background-color: #161b22; font-weight: bold; }
-                a { color: #58a6ff; }
-            `;
-        }
-        // Light Mode
+    const getPdfStyles = () => {
         return `
             body { font-family: Arial, sans-serif; font-size: 12pt; line-height: 1.5; color: #24292e; background-color: #ffffff; }
             pre, code { font-family: 'Courier New', Courier, monospace; }
-            pre { background-color: #f6f8fa; padding: 1em; border-radius: 6px; overflow-x: auto; }
+            pre { background-color: #f6f8fa; padding: 1em; border-radius: 6px; overflow-x: auto; border: 1px solid #dfe2e5; }
             table { border-collapse: collapse; width: 100%; margin-top: 1em; margin-bottom: 1em; }
             th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
             thead { background-color: #f6f8fa; font-weight: bold; }
@@ -34,8 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const createStyledHtml = (markdown) => {
-        const isDarkMode = themeToggle.checked;
-        const styles = getPdfStyles(isDarkMode);
+        const styles = getPdfStyles();
         const html = marked.parse(markdown);
         return `<html><head><style>${styles}</style></head><body>${html}</body></html>`;
     };
@@ -142,10 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     });
 
-    themeToggle.addEventListener('input', () => {
-        generatePdf(markdownInput.value);
-    });
-
     fileInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -169,7 +151,7 @@ Type your markdown in this pane. The PDF preview will appear on the right.
 * Real-time preview
 * Upload Markdown files
 * Download as PDF
-* Dark Mode Theme
+* Copy as PNG
 
 ### Styled Tables
 | Option | Description |
