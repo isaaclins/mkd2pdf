@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const markdownInput = document.getElementById('markdown-input');
     const pdfPreview = document.getElementById('pdf-preview');
     const downloadBtn = document.getElementById('download-pdf');
-    const downloadPngBtn = document.getElementById('download-png');
+    const copyPngBtn = document.getElementById('copy-png-btn');
     const fileInput = document.getElementById('file-input');
     const loader = document.getElementById('loader');
     const themeToggle = document.getElementById('theme-toggle');
@@ -91,12 +91,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    const downloadPng = () => {
+    const copyPng = () => {
         const markdown = markdownInput.value;
         if (!markdown.trim()) {
             alert('Please enter some markdown first.');
             return;
         }
+
+        if (!navigator.clipboard || !navigator.clipboard.write) {
+            alert('Clipboard API is not available in your browser. This feature requires a secure context (HTTPS).');
+            return;
+        }
+
         loader.classList.remove('hidden');
         const elementForPdf = createStyledHtml(markdown);
 
@@ -107,12 +113,23 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         html2pdf().from(elementForPdf).set(opt).toCanvas().get('canvas').then(canvas => {
-            const a = document.createElement('a');
-            a.href = canvas.toDataURL('image/png', 1.0);
-            a.download = 'markdown-export.png';
-            a.click();
+            canvas.toBlob(blob => {
+                navigator.clipboard.write([
+                    new ClipboardItem({ 'image/png': blob })
+                ]).then(() => {
+                    const originalText = copyPngBtn.textContent;
+                    copyPngBtn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        copyPngBtn.textContent = originalText;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Error copying PNG:', err);
+                    alert('Failed to copy image to clipboard.');
+                });
+            }, 'image/png', 1.0);
         }).catch(err => {
-            console.error('Error downloading PNG:', err);
+            console.error('Error generating canvas for PNG:', err);
+            alert('Failed to generate PNG.');
         }).finally(() => {
             loader.classList.add('hidden');
         });
@@ -142,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     downloadBtn.addEventListener('click', downloadPdf);
-    downloadPngBtn.addEventListener('click', downloadPng);
+    copyPngBtn.addEventListener('click', copyPng);
 
     const initialMarkdown = `# Welcome to Markdown to PDF!
     

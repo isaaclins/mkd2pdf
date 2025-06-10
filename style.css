@@ -173,7 +173,7 @@ footer {
     gap: 15px;
 }
 
-#download-pdf, #download-png {
+#download-pdf, #copy-png-btn {
     background-color: var(--primary-color);
     color: var(--light-text-color);
     border: none;
@@ -185,15 +185,15 @@ footer {
     transition: background-color 0.3s;
 }
 
-#download-pdf:hover, #download-png:hover {
+#download-pdf:hover, #copy-png-btn:hover {
     background-color: #2980b9;
 }
 
-#download-png {
+#copy-png-btn {
     background-color: #27ae60;
 }
 
-#download-png:hover {
+#copy-png-btn:hover {
     background-color: #229954;
 }
 
