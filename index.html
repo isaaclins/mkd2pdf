@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Markdown to PDF</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Markdown to PDF Converter</h1>
+      <h1>Markdown to PDF Converter</h1>
     </header>
     <main class="container">
-        <div class="editor-pane">
-            <textarea id="markdown-input" placeholder="Paste your Markdown here..."></textarea>
-            <div class="file-controls">
-                <input type="file" id="file-input" accept=".md,.txt">
-                <label for="file-input">Or Upload File</label>
-            </div>
+      <div class="editor-pane">
+        <textarea
+          id="markdown-input"
+          placeholder="Paste your Markdown here..."
+        ></textarea>
+        <div class="file-controls">
+          <input type="file" id="file-input" accept=".md,.txt" />
+          <label for="file-input">Or Upload File</label>
         </div>
-        <div class="preview-pane">
-            <div id="loader" class="hidden">Generating PDF...</div>
-            <iframe id="pdf-preview"></iframe>
-        </div>
+      </div>
+      <div class="preview-pane">
+        <div id="loader" class="hidden">Generating PDF...</div>
+        <iframe id="pdf-preview"></iframe>
+      </div>
     </main>
     <footer>
-        <button id="download-pdf">Download PDF</button>
+      <button id="download-png">Download as PNG</button>
+
+      <button id="download-pdf">Download PDF</button>
     </footer>
 
     <script src="script.js"></script>
-</body>
-</html> 
+  </body>
+</html>

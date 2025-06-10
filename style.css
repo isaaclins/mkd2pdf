@@ -121,9 +121,10 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 15px;
 }
 
-#download-pdf {
+#download-pdf, #download-png {
     background-color: var(--primary-color);
     color: var(--light-text-color);
     border: none;
@@ -135,8 +136,16 @@ footer {
     transition: background-color 0.3s;
 }
 
-#download-pdf:hover {
+#download-pdf:hover, #download-png:hover {
     background-color: #2980b9;
+}
+
+#download-png {
+    background-color: #27ae60;
+}
+
+#download-png:hover {
+    background-color: #229954;
 }
 
 @media (max-width: 768px) {
