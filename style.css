@@ -24,15 +24,62 @@ header, footer .credit {
     padding: 1rem;
     text-align: center;
     flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 h1 {
     margin: 0;
     font-size: 1.5rem;
 }
+
+.theme-switcher {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.toggle-checkbox {
+    display: none;
+}
+
+.toggle-label {
+    display: block;
+    width: 40px;
+    height: 22px;
+    background-color: #ccc;
+    border-radius: 11px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.toggle-label::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.2s;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+    background-color: var(--primary-color);
+}
+
+.toggle-checkbox:checked + .toggle-label::after {
+    transform: translateX(18px);
+}
+
 .white-text {
     color: var(--light-text-color);
 }
+
 .container {
     display: flex;
     flex: 1;
