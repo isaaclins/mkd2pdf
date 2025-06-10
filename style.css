@@ -18,7 +18,7 @@ body {
     height: 100vh;
 }
 
-header, footer {
+header, footer .credit {
     background-color: var(--secondary-color);
     color: var(--light-text-color);
     padding: 1rem;
@@ -30,7 +30,9 @@ h1 {
     margin: 0;
     font-size: 1.5rem;
 }
-
+.white-text {
+    color: var(--light-text-color);
+}
 .container {
     display: flex;
     flex: 1;
@@ -146,6 +148,13 @@ footer {
 
 #download-png:hover {
     background-color: #229954;
+}
+
+.credit {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9em;
+    color: #777;
 }
 
 @media (max-width: 768px) {
